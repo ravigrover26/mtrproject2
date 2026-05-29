@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "salesforce-dx": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@salesforce/mcp@latest", "--orgs", "mtrorg4", "--toolsets", "all"]
+    }
+  }
+}
