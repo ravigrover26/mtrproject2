@@ -58,6 +58,10 @@ public with sharing class MathUtility {
         validateNotNull(n, 'n');
         return n * 4;
     }
+    public static Integer pentruple(Integer n) {
+        validateNotNull(n, 'n');
+        return n * 5;
+    }
 
     // Centralises null checks so each method stays readable.
     private static void validateNotNull(Integer value, String paramName) {
