@@ -1,0 +1,27 @@
+Write Salesforce Apex using enterprise-safe best practices.
+
+Requirements:
+- Default to `with sharing` unless there is a documented reason not to.
+- Respect CRUD, FLS, and sharing where applicable.
+- Bulkify all logic for multi-record execution.
+- Never place SOQL or DML inside loops.
+- Use collections, maps, and set-based processing.
+- Use one trigger per object and keep triggers thin.
+- Move business logic into handler, service, selector, or utility classes when appropriate.
+- Write readable, maintainable code with clear naming.
+- Avoid unnecessary abstraction and avoid duplicate logic.
+- Handle errors explicitly; do not swallow exceptions.
+- Avoid exposing sensitive data in logs or error messages.
+
+For tests:
+- Generate a test class for every Apex class.
+- Use `@IsTest`.
+- Create all test data inside the test.
+- Cover positive, negative, edge, single-record, and bulk scenarios.
+- Use `Test.startTest()` and `Test.stopTest()` when appropriate.
+- Use assertions that validate actual behavior.
+- Use `System.runAs()` where user context matters.
+- Do not rely on existing org data.
+- Prioritize meaningful coverage over percentage chasing, while meeting deployment requirements.
+
+If the prompt is unclear, ask clarifying questions before generating code.
