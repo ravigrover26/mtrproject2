@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Displays the related Opportunities for an Account (Name, Stage, Close Date, Amount) sorted by Amount descending. Launched from the Show Opportunities quick action on the Account layout.</description>
+    <environments>Default</environments>
+    <interviewLabel>Show Opportunities {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Show Opportunities</label>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Opportunities</name>
+        <label>Get Opportunities</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Opportunities_Screen</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>StageName</queriedFields>
+        <queriedFields>CloseDate</queriedFields>
+        <queriedFields>Amount</queriedFields>
+        <sortField>Amount</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <name>Opportunities_Screen</name>
+        <label>Related Opportunities</label>
+        <locationX>176</locationX>
+        <locationY>398</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>OpportunitiesTable</name>
+            <extensionName>flowruntime:datatable</extensionName>
+            <dataTypeMappings>
+                <typeName>T</typeName>
+                <typeValue>Opportunity</typeValue>
+            </dataTypeMappings>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Related Opportunities (by Amount)</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>selectionMode</name>
+                <value>
+                    <stringValue>NO_SELECTION</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>minRowSelection</name>
+                <value>
+                    <stringValue>0</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>columns</name>
+                <value>
+                    <stringValue>[{"apiName":"Name","guid":"column-Name","editable":false,"hasCustomHeaderLabel":true,"customHeaderLabel":"Opportunity Name","wrapText":true,"order":0,"label":"Opportunity Name","type":"text"},{"apiName":"StageName","guid":"column-StageName","editable":false,"hasCustomHeaderLabel":true,"customHeaderLabel":"Stage","wrapText":true,"order":1,"label":"Stage","type":"text"},{"apiName":"CloseDate","guid":"column-CloseDate","editable":false,"hasCustomHeaderLabel":true,"customHeaderLabel":"Close Date","wrapText":true,"order":2,"label":"Close Date","type":"date-local"},{"apiName":"Amount","guid":"column-Amount","editable":false,"hasCustomHeaderLabel":true,"customHeaderLabel":"Amount","wrapText":true,"order":3,"label":"Amount","type":"currency"}]</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>tableData</name>
+                <value>
+                    <elementReference>Get_Opportunities</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>false</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Opportunities</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>
